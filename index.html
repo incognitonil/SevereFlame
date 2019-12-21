@@ -1,1 +1,41 @@
-hi
+<!DOCTYPE html>
+<html>
+<body>
+<p>Front: <input type="number" id="frontWeight" min="40" max="60" onchange="weighMe();" value=54>% </p>
+Common Numbers:
+<p>1 - 65 ARB  <label id="ARBF">some text</label>
+<label id="ARBB">some text</label></p>
+<p>3 - 20 Damping 
+	<label id="DampF">some text</label>
+	<label id="DampB">some text</label>
+	<label id="DampF60">some text</label>
+	<label id="DampB60">some text</label>
+</p>
+<p>
+	Springs Max: 
+	<input type="number" id="frontSpring" onchange="weighMe();" value=206.5>
+	min: <input type="number" id="rearSpring" onchange="weighMe();" value=41.3>
+	Front: <label id="frontDamp">some text</label>
+	Rear: <label id="rearDamp">some text</label>
+</p>
+<script>
+	function weighMe(){
+	var fw = parseInt(document.getElementById("frontWeight").value);
+	var fs = parseFloat (document.getElementById("frontSpring").value);
+	var rs = parseFloat (document.getElementById("rearSpring").value);
+	console.log(fs);
+	console.log(rs);
+	console.log(fs-rs);
+	document.getElementById("ARBF").innerHTML = 64 * fw / 100 + 1;
+	document.getElementById("ARBB").innerHTML = 64 * (100 - fw) / 100 + 1;
+	document.getElementById("DampF").innerHTML = 17 * fw / 100 + 3;
+	document.getElementById("DampB").innerHTML = 17 * (100 - fw) / 100 + 3;
+	document.getElementById("DampF60").innerHTML = (17 * fw / 100 + 3)*0.6;
+	document.getElementById("DampB60").innerHTML = (17 * (100 - fw) / 100 + 3)*0.6;
+	document.getElementById("frontDamp").innerHTML = (fs - rs) * fw / 100 + rs;
+	document.getElementById("rearDamp").innerHTML = (fs - rs) * (100 - fw) / 100 + rs;
+	};
+	weighMe();
+</script>
+</body>
+</html>
