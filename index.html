@@ -48,14 +48,9 @@ Common Numbers:
 		var speed2 = parseFloat(document.getElementById("speed2").value);
 		var time2 = parseFloat(document.getElementById("time2").value);
 		var topspeed = parseFloat(document.getElementById("topspeed").value);
-		localStorage.setItem("speed1", speed1);
-		localStorage.setItem("time1", time1);
-		localStorage.setItem("speed2", speed2);
-		localStorage.setItem("time2", time2);
-		localStorage.setItem("topspeed", topspeed);
 		document.getElementById("length1").innerHTML = speed1 * 1000 * time1 / 3600;
 		document.getElementById("length2").innerHTML = speed2 * 1000 * time2 / 3600;
-		document.getElementById("length3").innerHTML = topspeed * 1000 * time2 / 3600 / speed2;
+		document.getElementById("length3").innerHTML = topspeed * topspeed * 1000 * time2 / 3600 / speed2;
 	}
 	function weighMe(){
 		var fw = parseInt(document.getElementById("frontWeight").value);
