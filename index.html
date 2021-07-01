@@ -96,7 +96,7 @@ Common Numbers:
 		}
 		inputs = document.getElementsByTagName('input');
 		for (index = 0; index < inputs.length; ++index) {
-			if(localStorage.getItem(inputs[index].id)!=''){
+			if(localStorage.getItem(inputs[index].id)!=null){
 				console.log("Restoring " + inputs[index].id + " with value: " + localStorage.getItem(inputs[index].id));
 				inputs[index].value = localStorage.getItem(inputs[index].id);
 			}
@@ -109,7 +109,6 @@ Common Numbers:
 		return template.content.firstChild;
 	}
 	function createMeInner(count){
-		console.log(count);
 		var text1 = htmlToElement("<p></p>")
 		document.getElementById("springMe").appendChild(text1);
 		text1 = htmlToElement("Max: ")
@@ -128,7 +127,6 @@ Common Numbers:
 		document.getElementById("springMe").appendChild(text1);
 		var rearDamp = htmlToElement("<label id=\"rearDamp"+count+"\">some text</label>")
 		document.getElementById("springMe").appendChild(rearDamp);
-		console.log(document.getElementById("rearDamp"+count));
 	}
 	function createMe(){
 		var count = 0;
