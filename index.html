@@ -5,11 +5,17 @@
 Common Numbers:
 <p>1 - 65 ARB  <label id="ARBF">some text</label>
 <label id="ARBB">some text</label></p>
-<p>3 - 20 Damping 
+<p>3 - 20 Race Damping 
 	<label id="DampF">some text</label>
 	<label id="DampB">some text</label>
 	<label id="DampF60">some text</label>
 	<label id="DampB60">some text</label>
+</p>
+<p>1 - 10 Rally Damping 
+	<label id="RDampF">some text</label>
+	<label id="RDampB">some text</label>
+	<label id="RDampF60">some text</label>
+	<label id="RDampB60">some text</label>
 </p>
 <p>
 	Springs Max: 
@@ -18,24 +24,57 @@ Common Numbers:
 	Front: <label id="frontDamp">some text</label>
 	Rear: <label id="rearDamp">some text</label>
 </p>
+<p>
+	Speed and how long it takes to max speed:
+<p>
+	Speed 1:<input type="number" id="speed1" onchange="speedMe();" value=97>
+<p>
+	Time 1: <input type="number" id="time1" onchange="speedMe();" value=2.377>
+<p>
+	Speed 2:<input type="number" id="speed2" onchange="speedMe();" value=161>
+	Speed 2 time: <input type="number" id="time2" onchange="speedMe();" value=4.310>
+<p>
+	Top Speed:<input type="number" id="topspeed" onchange="speedMe();" value=410.4>
+<p>
+	Len1: <label id="length1">some text</label>
+	<p>
+	Len2: <label id="length2">some text</label>
+	<p>
+	Len3: <label id="length3">some text</label>
 <script>
+	function speedMe(){
+		var speed1 = parseFloat(document.getElementById("speed1").value);
+		var time1 = parseFloat(document.getElementById("time1").value);
+		var speed2 = parseFloat(document.getElementById("speed2").value);
+		var time2 = parseFloat(document.getElementById("time2").value);
+		var topspeed = parseFloat(document.getElementById("topspeed").value);
+		console.log(speed1);
+		document.getElementById("length1").innerHTML = speed1 * 1000 * time1 / 3600;
+		document.getElementById("length2").innerHTML = speed2 * 1000 * time2 / 3600;
+		document.getElementById("length3").innerHTML = topspeed * 1000 * time2 / 3600 / speed2;
+	}
 	function weighMe(){
-	var fw = parseInt(document.getElementById("frontWeight").value);
-	var fs = parseFloat (document.getElementById("frontSpring").value);
-	var rs = parseFloat (document.getElementById("rearSpring").value);
-	console.log(fs);
-	console.log(rs);
-	console.log(fs-rs);
-	document.getElementById("ARBF").innerHTML = 64 * fw / 100 + 1;
-	document.getElementById("ARBB").innerHTML = 64 * (100 - fw) / 100 + 1;
-	document.getElementById("DampF").innerHTML = 17 * fw / 100 + 3;
-	document.getElementById("DampB").innerHTML = 17 * (100 - fw) / 100 + 3;
-	document.getElementById("DampF60").innerHTML = (17 * fw / 100 + 3)*0.6;
-	document.getElementById("DampB60").innerHTML = (17 * (100 - fw) / 100 + 3)*0.6;
-	document.getElementById("frontDamp").innerHTML = (fs - rs) * fw / 100 + rs;
-	document.getElementById("rearDamp").innerHTML = (fs - rs) * (100 - fw) / 100 + rs;
+		var fw = parseInt(document.getElementById("frontWeight").value);
+		var fs = parseFloat (document.getElementById("frontSpring").value);
+		var rs = parseFloat (document.getElementById("rearSpring").value);
+		console.log(fs);
+		console.log(rs);
+		console.log(fs-rs);
+		document.getElementById("ARBF").innerHTML = 64 * fw / 100 + 1;
+		document.getElementById("ARBB").innerHTML = 64 * (100 - fw) / 100 + 1;
+		document.getElementById("DampF").innerHTML = 17 * fw / 100 + 3;
+		document.getElementById("DampB").innerHTML = 17 * (100 - fw) / 100 + 3;
+		document.getElementById("DampF60").innerHTML = (17 * fw / 100 + 3)*0.6;
+		document.getElementById("DampB60").innerHTML = (17 * (100 - fw) / 100 + 3)*0.6;
+		document.getElementById("frontDamp").innerHTML = (fs - rs) * fw / 100 + rs;
+		document.getElementById("rearDamp").innerHTML = (fs - rs) * (100 - fw) / 100 + rs;
+		document.getElementById("RDampF").innerHTML = 9 * fw / 100 + 1;
+		document.getElementById("RDampB").innerHTML = 9 * (100 - fw) / 100 + 1;
+		document.getElementById("RDampF60").innerHTML = (9 * fw / 100 + 1)*0.6;
+		document.getElementById("RDampB60").innerHTML = (9 * (100 - fw) / 100 + 1)*0.6;
 	};
 	weighMe();
+	speedMe();
 </script>
 </body>
 </html>
