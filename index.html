@@ -24,6 +24,9 @@ Common Numbers:
 	Front: <label id="frontDamp">some text</label>
 	Rear: <label id="rearDamp">some text</label>
 </p>
+<div id="springMe">
+	<button onclick="createMe()">Create Something</button>
+</div>
 <p>
 	Speed and how long it takes to max speed:
 <p>
@@ -68,6 +71,15 @@ Common Numbers:
 		document.getElementById("RDampB").innerHTML = 9 * (100 - fw) / 100 + 1;
 		document.getElementById("RDampF60").innerHTML = (9 * fw / 100 + 1)*0.6;
 		document.getElementById("RDampB60").innerHTML = (9 * (100 - fw) / 100 + 1)*0.6;
+		var count = 0,index=0;
+		if(localStorage.getItem("springCount")!='')
+			count = localStorage.getItem("springCount");
+		for(index=1;index<=count;++index){
+			var fs = parseFloat (document.getElementById("frontSpring"+index).value);
+			var rs = parseFloat (document.getElementById("rearSpring"+index).value);
+			document.getElementById("frontDamp"+index).innerHTML = (fs - rs) * fw / 100 + rs;
+			document.getElementById("rearDamp"+index).innerHTML = (fs - rs) * (100 - fw) / 100 + rs;
+		}
 	};
 	function storeMe(x){
 		localStorage.setItem(x.id, x.value);
@@ -76,6 +88,12 @@ Common Numbers:
 	}
 	function restoreMe(){
 		var inputs, index;
+		var count = 0;
+		if(localStorage.getItem("springCount")!='')
+			count = localStorage.getItem("springCount");
+		for(index=1;index<=count;++index){
+			createMeInner(index);
+		}
 		inputs = document.getElementsByTagName('input');
 		for (index = 0; index < inputs.length; ++index) {
 			if(localStorage.getItem(inputs[index].id)!=''){
@@ -83,6 +101,44 @@ Common Numbers:
 				inputs[index].value = localStorage.getItem(inputs[index].id);
 			}
 		}
+	}
+	function htmlToElement(html) {
+		var template = document.createElement('template');
+		//html = html.trim(); // Never return a text node of whitespace as the result
+		template.innerHTML = html;
+		return template.content.firstChild;
+	}
+	function createMeInner(count){
+		console.log(count);
+		var text1 = htmlToElement("<p></p>")
+		document.getElementById("springMe").appendChild(text1);
+		text1 = htmlToElement("Max: ")
+		document.getElementById("springMe").appendChild(text1);
+		var frontSpring = htmlToElement("<input type=\"number\" id=\"frontSpring"+count+"\" onchange=\"storeMe(this)\" value=206.5>")
+		document.getElementById("springMe").appendChild(frontSpring);
+		text1 = htmlToElement(" min: ")
+		document.getElementById("springMe").appendChild(text1);
+		var rearSpring = htmlToElement("<input type=\"number\" id=\"rearSpring"+count+"\" onchange=\"storeMe(this)\" value=41.3>");
+		document.getElementById("springMe").appendChild(rearSpring);
+		text1 = htmlToElement(" Front: ")
+		document.getElementById("springMe").appendChild(text1);
+		var frontDamp = htmlToElement("<label id=\"frontDamp"+count+"\">some text</label>")
+		document.getElementById("springMe").appendChild(frontDamp);
+		text1 = htmlToElement(" Rear: ")
+		document.getElementById("springMe").appendChild(text1);
+		var rearDamp = htmlToElement("<label id=\"rearDamp"+count+"\">some text</label>")
+		document.getElementById("springMe").appendChild(rearDamp);
+		console.log(document.getElementById("rearDamp"+count));
+	}
+	function createMe(){
+		var count = 0;
+		if(localStorage.getItem("springCount")!='')
+			count = localStorage.getItem("springCount");
+		count++;
+		createMeInner(count);
+		weighMe();
+		localStorage.setItem("springCount", count);
+		//document.body.appendChild(frontSpring);
 	}
 	restoreMe();
 	weighMe();
