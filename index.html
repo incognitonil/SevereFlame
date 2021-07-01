@@ -84,7 +84,7 @@ Common Numbers:
 		inputs = document.getElementsByTagName('input');
 		for (index = 0; index < inputs.length; ++index) {
 			if(localStorage.getItem(inputs[index].id)!=''){
-				console.log("not empty");
+				console.log("Restoring " + inputs[index].id + " with value: " + localStorage.getItem(inputs[index].id));
 				inputs[index].value = localStorage.getItem(inputs[index].id);
 			}
 		}
