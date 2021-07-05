@@ -1,49 +1,45 @@
 <!DOCTYPE html>
 <html>
 <body>
-<p>Front: <input type="number" id="frontWeight" min="40" max="60" onchange="storeMe(this)" value=54>% </p>
-Common Numbers:
-<p>1 - 65 ARB  <label id="ARBF">some text</label>
-<label id="ARBB">some text</label></p>
-<p>3 - 20 Race Damping 
+Front: <input type="number" id="frontWeight" min="40" max="60" onchange="storeMe(this)" value=54>%<br><br>
+<fieldset>
+<legend>Common Numbers:</legend>
+1 - 65 ARB  <label id="ARBF">some text</label>
+<label id="ARBB">some text</label>
+<br>3 - 20 Race Damping 
 	<label id="DampF">some text</label>
 	<label id="DampB">some text</label>
 	<label id="DampF60">some text</label>
 	<label id="DampB60">some text</label>
-</p>
-<p>1 - 10 Rally Damping 
+<br>1 - 10 Rally Damping 
 	<label id="RDampF">some text</label>
 	<label id="RDampB">some text</label>
 	<label id="RDampF60">some text</label>
 	<label id="RDampB60">some text</label>
-</p>
-<p>
-	Springs Max: 
+<br>
+</fieldset>
+<fieldset>
+	<legend>Springs</legend>
+	Max: 
 	<input type="number" id="frontSpring" onchange="storeMe(this)" value=206.5>
 	min: <input type="number" id="rearSpring" onchange="storeMe(this)" value=41.3>
 	Front: <label id="frontDamp">some text</label>
 	Rear: <label id="rearDamp">some text</label>
-</p>
 <div id="springMe">
-	<button onclick="createMe()">Create Something</button>
+	<button onclick="createMe()">Create Something</button><br>
 </div>
-<p>
-	Speed and how long it takes to max speed:
-<p>
-	Speed 1:<input type="number" id="speed1" onchange="storeMe(this)" value=97>
-<p>
-	Time 1: <input type="number" id="time1" onchange="storeMe(this)" value=2.377>
-<p>
-	Speed 2:<input type="number" id="speed2" onchange="storeMe(this)" value=161>
-	Speed 2 time: <input type="number" id="time2" onchange="storeMe(this)" value=4.310>
-<p>
-	Top Speed:<input type="number" id="topspeed" onchange="storeMe(this)" value=410.4>
-<p>
-	Len1: <label id="length1">some text</label>
-	<p>
-	Len2: <label id="length2">some text</label>
-	<p>
+</fieldset>
+<fieldset>
+	<legend>Speed and how long it takes to max speed:</legend>
+	Speed 1:<input type="number" id="speed1" onchange="storeMe(this)" value=97><br>
+	Time 1: <input type="number" id="time1" onchange="storeMe(this)" value=2.377><br>
+	Speed 2:<input type="number" id="speed2" onchange="storeMe(this)" value=161><br>
+	Speed 2 time: <input type="number" id="time2" onchange="storeMe(this)" value=4.310><br>
+	Top Speed:<input type="number" id="topspeed" onchange="storeMe(this)" value=410.4><br>
+	Len1: <label id="length1">some text</label><br>
+	Len2: <label id="length2">some text</label><br>
 	Len3: <label id="length3">some text</label>
+</fieldset>
 <script>
 	function speedMe(){
 		var speed1 = parseFloat(document.getElementById("speed1").value);
@@ -109,7 +105,7 @@ Common Numbers:
 		return template.content.firstChild;
 	}
 	function createMeInner(count){
-		var text1 = htmlToElement("<p></p>")
+		var text1 = htmlToElement("<br></p>")
 		document.getElementById("springMe").appendChild(text1);
 		text1 = htmlToElement("Max: ")
 		document.getElementById("springMe").appendChild(text1);
