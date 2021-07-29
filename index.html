@@ -43,7 +43,13 @@ Front: <input type="number" id="frontWeight" min="40" max="60" onchange="storeMe
 <fieldset>
 	<legend>Sonic Boom</legend>
 	Sonic: 343.2 m/s = 1193 km/h <br>
-	Gas gas gas
+	Power: <input type="number" id="oldPower" onchange="storeMe(this)" value=142>
+	Weight: <input type="number" id="oldWeight" onchange="storeMe(this)" value=670>
+	Power: <input type="number" id="newPower" onchange="storeMe(this)" value=142>
+	Weight: <input type="number" id="newWeight" onchange="storeMe(this)" value=670><br>
+	Old Ratio: <label id="oldRatio">some text</label>
+	New Ratio: <label id="newRatio">some text</label><br>
+	<label id="gasGasGas">Gas gas gas</label>
 </fieldset>
 <script>
 	function speedMe(){
@@ -81,11 +87,25 @@ Front: <input type="number" id="frontWeight" min="40" max="60" onchange="storeMe
 			document.getElementById("frontDamp"+index).innerHTML = (fs - rs) * fw / 100 + rs;
 			document.getElementById("rearDamp"+index).innerHTML = (fs - rs) * (100 - fw) / 100 + rs;
 		}
-	};
+	}
+	function ratioMe(){
+		var oldPower = parseInt(document.getElementById("oldPower").value);
+		var oldWeight = parseInt(document.getElementById("oldWeight").value);
+		var newPower = parseInt(document.getElementById("newPower").value);
+		var newWeight = parseInt(document.getElementById("newWeight").value);
+		document.getElementById("oldRatio").innerHTML = oldPower / oldWeight;
+		document.getElementById("newRatio").innerHTML = newPower / newWeight;
+		if(oldPower/oldWeight>newPower/newWeight){
+			document.getElementById("gasGasGas").innerHTML = "It's worse!";
+		}else{
+			document.getElementById("gasGasGas").innerHTML = "Better or equal, keep it up";
+		}
+	}
 	function storeMe(x){
 		localStorage.setItem(x.id, x.value);
 		weighMe();
 		speedMe();
+		ratioMe();
 	}
 	function restoreMe(){
 		var inputs, index;
