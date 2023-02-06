@@ -44,12 +44,18 @@ Front: <input type="number" id="frontWeight" min="40" max="60" onchange="storeMe
 	<legend>Sonic Boom</legend>
 	Sonic: 343.2 m/s = 1193 km/h <br>
 	Power: <input type="number" id="oldPower" onchange="storeMe(this)" value=142>
-	Weight: <input type="number" id="oldWeight" onchange="storeMe(this)" value=670>
+	Weight: <input type="number" id="oldWeight" onchange="storeMe(this)" value=670><br>
 	Power: <input type="number" id="newPower" onchange="storeMe(this)" value=142>
 	Weight: <input type="number" id="newWeight" onchange="storeMe(this)" value=670><br>
-	Old Ratio: <label id="oldRatio">some text</label>
+	Old Ratio: <label id="oldRatio">some text</label><br>
 	New Ratio: <label id="newRatio">some text</label><br>
 	<label id="gasGasGas">Gas gas gas</label>
+</fieldset>
+<fieldset>
+	<legend>HP to kw</legend>
+	HP: 1 horsepower is 0.74569987 kilowatts <br>
+	HP: <input type="number" id="imaHorse" onchange="horseMe(this)" value=1><br>
+	KW: <input type="number" id="imaPower" onchange="powerMe(this)" value=0.74569987>
 </fieldset>
 <script>
 	function speedMe(){
@@ -100,6 +106,14 @@ Front: <input type="number" id="frontWeight" min="40" max="60" onchange="storeMe
 		}else{
 			document.getElementById("gasGasGas").innerHTML = "Better or equal, keep it up";
 		}
+	}
+	function horseMe(x){
+		localStorage.setItem(x.id, x.value);
+		document.getElementById("imaPower").value = x.value * 0.74569987;
+	}
+	function powerMe(x){
+		localStorage.setItem(x.id, x.value);
+		document.getElementById("imaHorse").value = x.value / 0.74569987;
 	}
 	function storeMe(x){
 		localStorage.setItem(x.id, x.value);
